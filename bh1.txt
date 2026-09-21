@@ -1,0 +1,9 @@
+# Báo Cáo Phân Tích Sự Cố Dữ Liệu AutoRide
+
+Qua đối chiếu giữa UML Activity Diagram và thiết kế CSDL cũ, việc thiếu thuộc tính `damage_fee` trong bảng `Rentals` gây ra đứt gãy nghiêm trọng trong quy trình tài chính.
+
+Khi khách trả xe bị hư hỏng, Activity Diagram quy định nhánh xử lý tính phí sửa chữa và trừ trực tiếp vào tiền cọc. Việc thiếu `damage_fee` làm hệ thống không thể lưu vết số tiền khấu trừ, dẫn đến hai hậu quả:
+1. Nhân viên buộc phải trả lại đủ 100% tiền cọc cho khách, gây thất thoát chi phí sửa chữa cho AutoRide.
+2. Không ghi nhận được doanh thu từ tiền phạt, làm sai lệch báo cáo kế toán đối soát.
+
+Việc bổ sung các cột tài chính (`security_deposit`, `late_fee`, `damage_fee`) cùng bảng `Inspections` giúp tự động hóa công thức tính tiền hoàn trả (`Tiền cọc - Phí trễ - Phí sửa chữa`), đảm bảo tính toàn vẹn dữ liệu và minh bạch tài chính cho hệ thống.

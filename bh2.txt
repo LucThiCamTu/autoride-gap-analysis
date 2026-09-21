@@ -1,0 +1,13 @@
+# Nhật Ký Tương Tác AI (AI Prompt Log)
+
+## Prompt 1: Tìm hiểu kiểu dữ liệu tài chính
+- **Câu hỏi**: "Tại sao nên dùng DECIMAL thay vì FLOAT hay DOUBLE để lưu số tiền cọc và phí phạt trong CSDL MySQL?"
+- **Kết quả AI phản hồi**: FLOAT/DOUBLE sử dụng biểu diễn số thực dấu phẩy động dạng nhị phân nên bị lỗi làm tròn sai số (ví dụ: `0.1 + 0.2 = 0.30000000000000004`). DECIMAL lưu dưới dạng chuỗi/số cố định (exact numeric type), đảm bảo độ chính xác tuyệt đối cho các phép tính kế toán.
+
+## Prompt 2: Phân tích quan hệ 1-1 vs 1-N cho biên bản kiểm tra
+- **Câu hỏi**: "Khi nào nên dùng quan hệ 1-1 và 1-N giữa Rentals và Inspections?"
+- **Kết quả AI phản hồi**: Nếu một chuyến thuê chỉ được kiểm tra xe 1 lần lúc trả, có thể dùng 1-1. Tuy nhiên, nên dùng 1-N vì thực tế một hợp đồng thuê xe có thể cần kiểm tra xe nhiều lần (lúc nhận xe, lúc phát sinh sự cố giữa chừng, và lúc trả xe).
+
+## Prompt 3: Xử lý giá trị NULL khi tính toán SQL
+- **Câu hỏi**: "Nếu cột late_fee bị NULL thì phép tính `security_deposit - late_fee` có ra kết quả không?"
+- **Kết quả AI phản hồi**: Mọi phép tính với NULL đều trả về NULL. Giải pháp là đặt `DEFAULT 0.00 NOT NULL` cho các cột phí, hoặc dùng hàm `COALESCE(late_fee, 0)` khi truy vấn.
